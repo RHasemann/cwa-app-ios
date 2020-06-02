@@ -67,4 +67,13 @@ platform :ios do
     #)
   end
 
+  desc "Run AutoTests"
+  lane :autotest do
+    # Automated Tests
+    run_tests(
+      scheme: "ENAUIAutomatedTests",
+      devices: ["iPhone 8"]
+    )
+  end
+
 end

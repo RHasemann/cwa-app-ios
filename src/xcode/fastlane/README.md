@@ -31,6 +31,11 @@ Build project (Community)
 fastlane ios test
 ```
 Run tests
+### ios autotest
+```
+fastlane ios autotest
+```
+Run AutoTests
 
 ----
 

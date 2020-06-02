@@ -85,6 +85,7 @@
 		51FE277B2475340300BB8144 /* HomeRiskLoadingItemViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FE277A2475340300BB8144 /* HomeRiskLoadingItemViewConfigurator.swift */; };
 		51FE277D247535C400BB8144 /* RiskLoadingItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51FE277C247535C400BB8144 /* RiskLoadingItemView.xib */; };
 		51FE277F247535E300BB8144 /* RiskLoadingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FE277E247535E300BB8144 /* RiskLoadingItemView.swift */; };
+		6208D8AA2486CB3100A7AC18 /* ENAUIAutomatedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6208D8A92486CB3100A7AC18 /* ENAUIAutomatedTests.swift */; };
 		710ABB1F2475115500948792 /* UITableViewController+Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710ABB1E2475115500948792 /* UITableViewController+Enum.swift */; };
 		710ABB23247513E300948792 /* DynamicTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710ABB22247513E300948792 /* DynamicTypeTableViewCell.swift */; };
 		710ABB25247514BD00948792 /* UIViewController+Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710ABB24247514BD00948792 /* UIViewController+Segue.swift */; };
@@ -258,6 +259,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6208D8AC2486CB3100A7AC18 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 85D759332457048F008175F0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 85D7593A2457048F008175F0;
+			remoteInfo = ENA;
+		};
 		85D7595524570491008175F0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 85D759332457048F008175F0 /* Project object */;
@@ -369,6 +377,9 @@
 		51FE277A2475340300BB8144 /* HomeRiskLoadingItemViewConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRiskLoadingItemViewConfigurator.swift; sourceTree = "<group>"; };
 		51FE277C247535C400BB8144 /* RiskLoadingItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RiskLoadingItemView.xib; sourceTree = "<group>"; };
 		51FE277E247535E300BB8144 /* RiskLoadingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskLoadingItemView.swift; sourceTree = "<group>"; };
+		6208D8A72486CB3100A7AC18 /* ENAUIAutomatedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ENAUIAutomatedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6208D8A92486CB3100A7AC18 /* ENAUIAutomatedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENAUIAutomatedTests.swift; sourceTree = "<group>"; };
+		6208D8AB2486CB3100A7AC18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		710ABB1E2475115500948792 /* UITableViewController+Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewController+Enum.swift"; sourceTree = "<group>"; };
 		710ABB22247513E300948792 /* DynamicTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicTypeTableViewCell.swift; sourceTree = "<group>"; };
 		710ABB24247514BD00948792 /* UIViewController+Segue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Segue.swift"; sourceTree = "<group>"; };
@@ -545,6 +556,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6208D8A42486CB3100A7AC18 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		85D759382457048F008175F0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -894,6 +912,15 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		6208D8A82486CB3100A7AC18 /* ENAUIAutomatedTests */ = {
+			isa = PBXGroup;
+			children = (
+				6208D8A92486CB3100A7AC18 /* ENAUIAutomatedTests.swift */,
+				6208D8AB2486CB3100A7AC18 /* Info.plist */,
+			);
+			path = ENAUIAutomatedTests;
+			sourceTree = "<group>";
+		};
 		71CC3E99246D5D5800217F2C /* AppInformation */ = {
 			isa = PBXGroup;
 			children = (
@@ -990,6 +1017,7 @@
 				85D7593D2457048F008175F0 /* ENA */,
 				85D7595724570491008175F0 /* ENATests */,
 				85D7596224570491008175F0 /* ENAUITests */,
+				6208D8A82486CB3100A7AC18 /* ENAUIAutomatedTests */,
 				85D7593C2457048F008175F0 /* Products */,
 				5107E3D72459B2D60042FC9B /* Frameworks */,
 				B1741B572462EB26006275D9 /* Recovered References */,
@@ -1003,6 +1031,7 @@
 				85D7593B2457048F008175F0 /* ENA.app */,
 				85D7595424570491008175F0 /* ENATests.xctest */,
 				85D7595F24570491008175F0 /* ENAUITests.xctest */,
+				6208D8A72486CB3100A7AC18 /* ENAUIAutomatedTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1477,6 +1506,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6208D8A62486CB3100A7AC18 /* ENAUIAutomatedTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6208D8B22486CB3100A7AC18 /* Build configuration list for PBXNativeTarget "ENAUIAutomatedTests" */;
+			buildPhases = (
+				6208D8A32486CB3100A7AC18 /* Sources */,
+				6208D8A42486CB3100A7AC18 /* Frameworks */,
+				6208D8A52486CB3100A7AC18 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6208D8AD2486CB3100A7AC18 /* PBXTargetDependency */,
+			);
+			name = ENAUIAutomatedTests;
+			productName = ENAUIAutomatedTests;
+			productReference = 6208D8A72486CB3100A7AC18 /* ENAUIAutomatedTests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		85D7593A2457048F008175F0 /* ENA */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85D7596824570491008175F0 /* Build configuration list for PBXNativeTarget "ENA" */;
@@ -1548,6 +1595,10 @@
 				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = "SAP SE";
 				TargetAttributes = {
+					6208D8A62486CB3100A7AC18 = {
+						CreatedOnToolsVersion = 11.5;
+						TestTargetID = 85D7593A2457048F008175F0;
+					};
 					85D7593A2457048F008175F0 = {
 						CreatedOnToolsVersion = 11.4.1;
 					};
@@ -1584,11 +1635,19 @@
 				85D7593A2457048F008175F0 /* ENA */,
 				85D7595324570491008175F0 /* ENATests */,
 				85D7595E24570491008175F0 /* ENAUITests */,
+				6208D8A62486CB3100A7AC18 /* ENAUIAutomatedTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6208D8A52486CB3100A7AC18 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		85D759392457048F008175F0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1671,6 +1730,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6208D8A32486CB3100A7AC18 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6208D8AA2486CB3100A7AC18 /* ENAUIAutomatedTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		85D759372457048F008175F0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1901,6 +1968,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6208D8AD2486CB3100A7AC18 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 85D7593A2457048F008175F0 /* ENA */;
+			targetProxy = 6208D8AC2486CB3100A7AC18 /* PBXContainerItemProxy */;
+		};
 		85D7595624570491008175F0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 85D7593A2457048F008175F0 /* ENA */;
@@ -2074,6 +2146,82 @@
 				TEST_TARGET_NAME = ENA;
 			};
 			name = Community;
+		};
+		6208D8AE2486CB3100A7AC18 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6WQYJS4JUL;
+				INFOPLIST_FILE = ENAUIAutomatedTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sap.d025425.ENAUIAutomatedTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ENA;
+			};
+			name = Debug;
+		};
+		6208D8AF2486CB3100A7AC18 /* Community */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6WQYJS4JUL;
+				INFOPLIST_FILE = ENAUIAutomatedTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sap.d025425.ENAUIAutomatedTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ENA;
+			};
+			name = Community;
+		};
+		6208D8B02486CB3100A7AC18 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6WQYJS4JUL;
+				INFOPLIST_FILE = ENAUIAutomatedTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sap.d025425.ENAUIAutomatedTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ENA;
+			};
+			name = Release;
+		};
+		6208D8B12486CB3100A7AC18 /* ReleaseAppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6WQYJS4JUL;
+				INFOPLIST_FILE = ENAUIAutomatedTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sap.d025425.ENAUIAutomatedTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ENA;
+			};
+			name = ReleaseAppStore;
 		};
 		85D7596624570491008175F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -2457,6 +2605,17 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6208D8B22486CB3100A7AC18 /* Build configuration list for PBXNativeTarget "ENAUIAutomatedTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6208D8AE2486CB3100A7AC18 /* Debug */,
+				6208D8AF2486CB3100A7AC18 /* Community */,
+				6208D8B02486CB3100A7AC18 /* Release */,
+				6208D8B12486CB3100A7AC18 /* ReleaseAppStore */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		85D759362457048F008175F0 /* Build configuration list for PBXProject "ENA" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
