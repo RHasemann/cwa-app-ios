@@ -32,9 +32,6 @@ class ExposureSubmissionOverviewViewController: DynamicTableViewController, Spin
 	private var exposureSubmissionService: ExposureSubmissionService?
 	var spinner: UIActivityIndicatorView?
 
-	private var testResults: [ExposureSubmissionTestResult] = [ExposureSubmissionTestResult(isPositive: true, receivedDate: Date(), transmittedDate: Date())]
-	private var mostRecentTestResult: ExposureSubmissionTestResult? { testResults.last }
-
 	// MARK: - Initializers.
 
 	required init?(coder aDecoder: NSCoder) {
@@ -46,9 +43,6 @@ class ExposureSubmissionOverviewViewController: DynamicTableViewController, Spin
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
-		if exposureSubmissionService?.hasRegistrationToken() ?? false {
-			fetchResult()
-		}
 	}
 
 	override func viewDidLoad() {
@@ -111,6 +105,33 @@ class ExposureSubmissionOverviewViewController: DynamicTableViewController, Spin
 			}
 		}
 	}
+
+	/// Shows the data privacy disclaimer and only lets the
+	/// user scan a QR code after accepting.
+	func showDisclaimer() {
+		let alert = UIAlertController(
+			title: AppStrings.ExposureSubmission.dataPrivacyTitle,
+			message: AppStrings.ExposureSubmission.dataPrivacyDisclaimer,
+			preferredStyle: .alert
+		)
+
+		alert.addAction(.init(title: AppStrings.ExposureSubmission.dataPrivacyAcceptTitle,
+							  style: .default,
+							  handler: { _ in
+								self.performSegue(
+									withIdentifier: Segue.qrScanner,
+									sender: self
+								)
+		}))
+
+		alert.addAction(.init(title: AppStrings.ExposureSubmission.dataPrivacyDontAcceptTitle,
+							  style: .cancel,
+							  handler: { _ in
+								alert.dismiss(animated: true, completion: nil) }
+			))
+
+		present(alert, animated: true, completion: nil)
+	}
 }
 
 extension ExposureSubmissionOverviewViewController {
@@ -133,7 +154,7 @@ extension ExposureSubmissionOverviewViewController {
 
 extension ExposureSubmissionOverviewViewController: ExposureSubmissionQRScannerDelegate {
 	func qrScanner(_ viewController: ExposureSubmissionQRScannerViewController, error: QRScannerError) {
-		dismissQRCodeScannerView(viewController)
+		dismissQRCodeScannerView(viewController, completion: nil)
 		switch error {
 		case .cameraPermissionDenied:
 			let alert = ExposureSubmissionViewUtils.setupAlert(message: "You need to allow camera access.")
@@ -145,26 +166,28 @@ extension ExposureSubmissionOverviewViewController: ExposureSubmissionQRScannerD
 
 	func qrScanner(_ vc: ExposureSubmissionQRScannerViewController, didScan code: String) {
 		guard let guid = sanitizeAndExtractGuid(code) else {
-			dismissQRCodeScannerView(vc)
+			dismissQRCodeScannerView(vc, completion: nil)
 			let alert = ExposureSubmissionViewUtils.setupAlert(message: "The provided QR code was invalid.")
 			present(alert, animated: true, completion: nil)
 			return
 		}
 
 		// Found QR Code, deactivate scanning.
-		dismissQRCodeScannerView(vc)
-		startSpinner()
+		dismissQRCodeScannerView(vc, completion: {
+			self.startSpinner()
+			self.getRegistrationToken(forKey: .guid(guid))
+		})
+	}
 
-		exposureSubmissionService?.getRegistrationToken(forKey: .guid(guid), completion: { result in
+	private func getRegistrationToken(forKey: DeviceRegistrationKey) {
+		exposureSubmissionService?.getRegistrationToken(forKey: forKey, completion: { result in
+			self.stopSpinner()
 			switch result {
 			case let .failure(error):
-				self.stopSpinner()
 				logError(message: "Error while getting registration token: \(error)", level: .error)
-				let alert = ExposureSubmissionViewUtils.setupConfirmationAlert {
-					self.dismissQRCodeScannerView(vc)
-				}
-
+				let alert = ExposureSubmissionViewUtils.setupErrorAlert(error)
 				self.present(alert, animated: true, completion: nil)
+
 			case let .success(token):
 				print("Received registration token: \(token)")
 				self.fetchResult()
@@ -188,66 +211,9 @@ extension ExposureSubmissionOverviewViewController: ExposureSubmissionQRScannerD
 		return candidate
 	}
 
-	private func dismissQRCodeScannerView(_ vc: ExposureSubmissionQRScannerViewController) {
+	private func dismissQRCodeScannerView(_ vc: ExposureSubmissionQRScannerViewController, completion: (() -> Void)?) {
 		vc.delegate = nil
-		vc.dismiss(animated: true, completion: nil)
-	}
-}
-
-extension DynamicTableViewModel {
-	mutating func addHelpSection() {
-		add(
-			.section(
-				header: .text("Hilfe"),
-				cells: [
-					.phone(text: "Hotline anrufen", number: "0123456789")
-				]
-			)
-		)
-	}
-
-	mutating func addNextStepsSection() {
-		add(
-			.section(
-				header: .text("Nächste Schritte"),
-				cells:
-				[
-					.icon(
-						action: .perform(segue: ExposureSubmissionOverviewViewController.Segue.tanInput),
-						DynamicIcon(
-							text: "TeleTan eingeben",
-							image: UIImage(systemName: "doc.text"),
-							backgroundColor: .preferredColor(for: .brandBlue),
-							tintColor: .black
-						)
-					),
-					.icon(
-						action: .perform(segue: ExposureSubmissionOverviewViewController.Segue.qrScanner),
-						DynamicIcon(
-							text: "QR-Code scannen",
-							image: UIImage(systemName: "doc.text"),
-							backgroundColor: .preferredColor(for: .brandBlue),
-							tintColor: .black
-						)
-					)
-				]
-			)
-		)
-	}
-
-	mutating func addWhatIfSection() {
-		let header = DynamicHeader.image(UIImage(named: "app-information-people"))
-
-		add(
-			.section(
-				header: header,
-				separators: false,
-				cells: [
-					.semibold(text: "Wenn Sie einen Covid-19 Test gemacht haben, können Sie sich hier das Testergebnis anzeigen lassen."),
-					.regular(text: "Sollte das Testergebnis positiv sein, haben Sie zusätzlich die Möglichkeit Ihren Befund anonym zu melden, damit Kontaktpersonen informiert werden können.")
-				]
-			)
-		)
+		vc.dismiss(animated: true, completion: completion)
 	}
 }
 
@@ -262,7 +228,7 @@ private extension ExposureSubmissionOverviewViewController {
 				header: header,
 				separators: false,
 				cells: [
-					.semibold(text: AppStrings.ExposureSubmissionDispatch.description)
+					.regular(text: AppStrings.ExposureSubmissionDispatch.description)
 				]
 			)
 		)
@@ -270,7 +236,9 @@ private extension ExposureSubmissionOverviewViewController {
 		data.add(DynamicSection.section(cells: [
 			.identifier(
 				CustomCellReuseIdentifiers.imageCard,
-				action: .perform(segue: Segue.qrScanner),
+				action: .execute(block: { _ in
+					self.showDisclaimer()
+				}),
 				configure: { _, cell, _ in
 					guard let cell = cell as? DynamicTableViewImageCardCell else { return }
 					cell.configure(

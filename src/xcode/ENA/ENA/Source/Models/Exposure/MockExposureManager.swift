@@ -15,8 +15,8 @@
 // specific language governing permissions and limitations
 // under the License.
 
-@testable import ENA
 import ExposureNotification
+import UIKit
 
 final class MockExposureManager {
 	typealias MockDiagnosisKeysResult = ([ENTemporaryExposureKey]?, Error?)
@@ -53,7 +53,7 @@ extension MockExposureManager: ExposureManager {
 	}
 
 	func preconditions() -> ExposureManagerState {
-		ExposureManagerState(authorized: true, enabled: true, active: true, bluetoothOff: false)
+		ExposureManagerState(authorized: true, enabled: true, status: .active)
 	}
 
 	func detectExposures(configuration _: ENExposureConfiguration, diagnosisKeyURLs _: [URL], completionHandler _: @escaping ENDetectExposuresHandler) -> Progress {
@@ -66,5 +66,13 @@ extension MockExposureManager: ExposureManager {
 
 	func accessDiagnosisKeys(completionHandler: @escaping ENGetDiagnosisKeysHandler) {
 		completionHandler(diagnosisKeysResult!.0, diagnosisKeysResult!.1)
+	}
+
+	func resume(observer: ENAExposureManagerObserver) {	}
+
+	func alertForBluetoothOff(completion: @escaping () -> Void) -> UIAlertController? { return nil }
+
+	func requestUserNotificationsPermissions(completionHandler: @escaping (() -> Void)) {
+		completionHandler()
 	}
 }
